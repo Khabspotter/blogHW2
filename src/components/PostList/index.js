@@ -1,8 +1,9 @@
+import { LinkedCameraSharp } from "@mui/icons-material";
 import React, { useState } from "react";
 import { Post } from "../Post";
 import "./index.css";
 
-export const PostList = ({ mapPosts }) => {
+export const PostList = ({ mapPosts, like, setLike }) => {
   const [buttonClick, setButtonClick] = useState(1);
 
   const buttonBlock = () => {
@@ -27,8 +28,8 @@ export const PostList = ({ mapPosts }) => {
   return (
     <div>
       <div className="postlist">
-        {data.map((item, i) => (
-          <Post key={i} postsKey={item} />
+        {data.map((item) => (
+          <Post key={item._id} postsKey={item} setLike={setLike} isLiked={like.includes(item._id)}/>
         ))}
       </div>
       <div className="buttonBlock">{buttonBlock(mapPosts)}</div>
