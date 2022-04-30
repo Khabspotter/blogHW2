@@ -11,9 +11,12 @@ import dayjs from "dayjs";
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import api from "../../utils/api";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+import CardMedia from '@mui/material/CardMedia';
+import { useNavigate } from "react-router-dom";
 
-export const Post = ({ postsKey, isLiked, setLike }) => {
+export const Post = ({ postsKey, isLiked, setLike, userInfo }) => {
   const [liked, setLiked] = useState(postsKey.likes.length);
+  const navigate=useNavigate()
 
   const addLS = (key, value) => {
     const storage = JSON.parse(localStorage.getItem(key)) || [];
@@ -59,17 +62,23 @@ export const Post = ({ postsKey, isLiked, setLike }) => {
       })
       .catch((err) => alert(err));
   };
-
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
-        <Typography sx={{ fontSize: 16 }} color="text.primary" gutterBottom>
+        <Typography sx={{ fontSize: 16 }} color="text.primary" gutterBottom onClick={()=>navigate(`/posts/${postsKey._id}`)}>
           {postsKey.title}
         </Typography>
         <hr />
         <Typography variant="h9" component="div" color="text.secondary">
           👤 {postsKey.author.email}
         </Typography>
+        <br />
+        <CardMedia
+        component="img"
+        height="200"
+        image={postsKey.image}
+        alt="Изображение"
+      />
         <br />
         <Typography variant="body2">{postsKey.text}</Typography>
         <br />
@@ -82,7 +91,7 @@ export const Post = ({ postsKey, isLiked, setLike }) => {
         </Typography>
         <br />
 
-        {isLiked ? (
+        {isLiked  ? (
           <IconButton onClick={removeLike}>
             <FavoriteIcon fontSize="small" />
             <p style={{ fontSize: "small" }}>{liked}</p>
@@ -93,9 +102,9 @@ export const Post = ({ postsKey, isLiked, setLike }) => {
             <p style={{ fontSize: "small" }}>{liked}</p>
           </IconButton>
         )}
-        <IconButton onClick={deletePost}>
+        {(userInfo._id == postsKey.author._id) && (<IconButton onClick={deletePost}>
           <DeleteOutlinedIcon />
-        </IconButton>
+        </IconButton>)}
       </CardContent>
     </Card>
   );

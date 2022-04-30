@@ -52,6 +52,17 @@ class Api {
         },
       }).then(onResponce);
     }
+
+    createPost(post){
+      return fetch(`${this._url}/posts`, {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${this._token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(post)
+      }).then(onResponce);
+    }
 }
 
 export default new Api(config);

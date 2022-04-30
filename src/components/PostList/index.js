@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Post } from "../Post";
 import "./index.css";
 
-export const PostList = ({ mapPosts, like, setLike }) => {
+export const PostList = ({ mapPosts, like, setLike, userInfo }) => {
   const [buttonClick, setButtonClick] = useState(1);
 
   const buttonBlock = () => {
@@ -29,7 +29,7 @@ export const PostList = ({ mapPosts, like, setLike }) => {
     <div>
       <div className="postlist">
         {data.map((item) => (
-          <Post key={item._id} postsKey={item} setLike={setLike} isLiked={like.includes(item._id)}/>
+          <Post key={item._id} postsKey={item} userInfo={userInfo} setLike={setLike} isLiked={like.includes(item._id)}/>
         ))}
       </div>
       <div className="buttonBlock">{buttonBlock(mapPosts)}</div>
