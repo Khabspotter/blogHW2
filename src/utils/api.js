@@ -10,8 +10,9 @@ class Api {
     this._token = token;
   }
 
-  getPosts() {
-    return fetch(`${this._url}/posts`, {
+  getPosts(postID) {
+    const requestURL= postID ? `${this._url}/posts/${postID}` : `${this._url}/posts/`;
+    return fetch(requestURL, {
       headers: {
         authorization: `Bearer ${this._token}`,
       },
@@ -61,6 +62,14 @@ class Api {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(post)
+      }).then(onResponce);
+    }
+    
+    getComments(postID){
+      return fetch(`${this._url}/posts/comments/${postID}`, {
+        headers: {
+          authorization: `Bearer ${this._token}`,
+        },
       }).then(onResponce);
     }
 }

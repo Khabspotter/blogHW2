@@ -13,6 +13,7 @@ import api from "../../utils/api";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import CardMedia from '@mui/material/CardMedia';
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Post = ({ postsKey, isLiked, setLike, userInfo }) => {
   const [liked, setLiked] = useState(postsKey.likes.length);
@@ -65,17 +66,17 @@ export const Post = ({ postsKey, isLiked, setLike, userInfo }) => {
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
-        <Typography sx={{ fontSize: 16 }} color="text.primary" gutterBottom onClick={()=>navigate(`/posts/${postsKey._id}`)}>
-          {postsKey.title}
+        <Typography sx={{ fontSize: 16 }} color="text.primary" gutterBottom >
+          <Link to={`posts/${postsKey._id}`}>{postsKey.title}</Link>
         </Typography>
         <hr />
         <Typography variant="h9" component="div" color="text.secondary">
-          👤 {postsKey.author.email}
+          👤 {postsKey.author.name}
         </Typography>
         <br />
         <CardMedia
         component="img"
-        height="200"
+        height="auto"
         image={postsKey.image}
         alt="Изображение"
       />
