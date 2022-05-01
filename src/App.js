@@ -16,7 +16,7 @@ function App() {
 
   useEffect(() => {
     api.getPosts().then((result) => {
-      setPosts(result.reverse());console.log(result);
+      setPosts(result.reverse());
     });
   }, []);
 
