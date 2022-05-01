@@ -14,6 +14,7 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import CardMedia from '@mui/material/CardMedia';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
 
 export const Post = ({ postsKey, isLiked, setLike, userInfo }) => {
   const [liked, setLiked] = useState(postsKey.likes.length);
@@ -105,6 +106,10 @@ export const Post = ({ postsKey, isLiked, setLike, userInfo }) => {
         )}
         {(userInfo._id == postsKey.author._id) && (<IconButton onClick={deletePost}>
           <DeleteOutlinedIcon />
+        </IconButton>)}
+        {(postsKey.comments.length>0) &&(<IconButton>
+        <ForumOutlinedIcon fontSize="small"/>
+        <p style={{ fontSize: "small" }}>{postsKey.comments.length}</p>
         </IconButton>)}
       </CardContent>
     </Card>
