@@ -72,6 +72,19 @@ class Api {
         },
       }).then(onResponce);
     }
+
+    addComment(comment,postID){
+      return fetch(`${this._url}/posts/comments/${postID}`, {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${this._token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(comment)
+      }).then(onResponce);
+    }
 }
+
+
 
 export default new Api(config);

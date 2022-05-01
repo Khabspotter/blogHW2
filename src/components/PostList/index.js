@@ -11,7 +11,14 @@ export const PostList = ({ mapPosts, like, setLike, userInfo }) => {
     const buttonNum = Math.ceil(mapPosts.length / 12);
     for (let i = 1; i <= buttonNum; i++) {
       buttonList.push(
-        <button className="numButton" key={i} onClick={() => setButtonClick(i)}>
+        <button
+          className="numButton"
+          key={i}
+          onClick={() => {
+            setButtonClick(i);
+            window.scrollTo(0, 0);
+          }}
+        >
           {i}
         </button>
       );
@@ -29,7 +36,13 @@ export const PostList = ({ mapPosts, like, setLike, userInfo }) => {
     <div>
       <div className="postlist">
         {data.map((item) => (
-          <Post key={item._id} postsKey={item} userInfo={userInfo} setLike={setLike} isLiked={like.includes(item._id)}/>
+          <Post
+            key={item._id}
+            postsKey={item}
+            userInfo={userInfo}
+            setLike={setLike}
+            isLiked={like.includes(item._id)}
+          />
         ))}
       </div>
       <div className="buttonBlock">{buttonBlock(mapPosts)}</div>

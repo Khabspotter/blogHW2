@@ -64,6 +64,9 @@ export const Post = ({ postsKey, isLiked, setLike, userInfo }) => {
       })
       .catch((err) => alert(err));
   };
+
+
+
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
@@ -101,13 +104,13 @@ export const Post = ({ postsKey, isLiked, setLike, userInfo }) => {
         ) : (
           <IconButton onClick={getLike}>
             <FavoriteBorderIcon fontSize="small" />
-            <p style={{ fontSize: "small" }}>{liked}</p>
+            {(liked>0)&&(<p style={{ fontSize: "small" }}>{liked}</p>)}
           </IconButton>
         )}
         {(userInfo._id == postsKey.author._id) && (<IconButton onClick={deletePost}>
           <DeleteOutlinedIcon />
         </IconButton>)}
-        {(postsKey.comments.length>0) &&(<IconButton>
+        {(postsKey.comments.length>0) &&(<IconButton onClick={()=>(navigate(`posts/${postsKey._id}`))}>
         <ForumOutlinedIcon fontSize="small"/>
         <p style={{ fontSize: "small" }}>{postsKey.comments.length}</p>
         </IconButton>)}
