@@ -29,17 +29,19 @@ function App() {
   return (
     <div>
       <Header userInfo={userInfo} />
-      <Greeting />
+      
       <Routes>
         <Route
           path="/"
-          element={
+          element={<div>
+            <Greeting />;
             <PostList
               mapPosts={posts}
               like={like}
               setLike={setLike}
               userInfo={userInfo}
             />
+            </div>
           }
         />
         <Route path="create" element={<AddPost />} />
