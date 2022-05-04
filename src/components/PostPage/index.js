@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import api from "../../utils/api";
 import dayjs from "dayjs";
 import "./index.css";
 import TextField from "@mui/material/TextField";
+import { useApi } from "../../hooks/useApi";
 
 export const PostPage = () => {
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState(null);
   const params = useParams();
-
+  const api = useApi();
   useEffect(() => {
     api
       .getPosts(params.postID)
@@ -38,7 +38,11 @@ export const PostPage = () => {
         },
         params.postID
       )
-      .then((data) => document.location.reload())
+      .then((data) => api.getComments(params.postID))
+      .then((data) => {
+        setComments(data);
+        event.target.new_comment.value = "";
+      })
       .catch((err) => alert("Заполните поле комментария"));
   };
 

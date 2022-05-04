@@ -1,4 +1,3 @@
-import { LinkedCameraSharp } from "@mui/icons-material";
 import React, { useState } from "react";
 import { Post } from "../Post";
 import "./index.css";
@@ -41,7 +40,7 @@ export const PostList = ({ mapPosts, like, setLike, userInfo }) => {
             postsKey={item}
             userInfo={userInfo}
             setLike={setLike}
-            isLiked={like.includes(item._id)}
+            isLiked={like?.includes(item._id)}
           />
         ))}
       </div>

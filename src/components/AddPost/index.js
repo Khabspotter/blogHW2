@@ -1,11 +1,12 @@
 import React from "react";
-import api from "../../utils/api";
 import TextField from "@mui/material/TextField";
 import { useNavigate } from "react-router-dom";
 import "./index.css";
+import { useApi } from "../../hooks/useApi";
 
 export const AddPost = () => {
   const navigate = useNavigate();
+  const api=useApi()
   const handleSubmit = (event) => {
     event.preventDefault();
     const {
